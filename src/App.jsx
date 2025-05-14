@@ -1,58 +1,27 @@
-import { useState } from "react";
-import { sculptureList } from "./data";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.min.css";
+import "./index.css";
+import Header from "./components/Header";
+import AddItemForm from "./components/AddItemFrom";
+import NoItem from "./components/NoItem";
+import FilterButtons from "./components/FilterButtons";
+import ListItems from "./components/ListItems";
+import ClearButton from "./components/ClearButton";
 
-function App() {
-  const [index, setIndex] = useState(0);
-  const [showMore, setShowMore] = useState(false);
-
-  let sculpture = sculptureList[index];
-
-  function handlePreviousClick() {
-    if (index > 0) {
-      setIndex(index - 1);
-    } else {
-      setIndex(sculptureList.length - 1);
-    }
-  }
-
-  function handleNextClick() {
-    if (index < sculptureList.length - 1) {
-      setIndex(index + 1);
-    } else {
-      setIndex(0);
-    }
-  }
-
-  function handleMoreClick() {
-    setShowMore(!showMore);
-  }
-
+export default function App() {
   return (
-    <>
-      <button onClick={handlePreviousClick}>Previous</button>
-      <button onClick={handleNextClick}>Next</button>
+    <div className="container">
+      <Header />
 
-      <h2>
-        <i>
-          {sculpture.name} by {sculpture.artist}
-        </i>
-      </h2>
+      <AddItemForm />
 
-      <h3>
-        ({index + 1} of {sculptureList.length})
-      </h3>
+      <NoItem />
 
-      <img src={sculpture.url} alt={sculpture.alt} />
+      <FilterButtons />
 
-      <p>
-        <button onClick={handleMoreClick}>
-          {showMore ? "Hide" : "Show"} Details
-        </button>
-      </p>
+      <ListItems />
 
-      {showMore && <p>{sculpture.description}</p>}
-    </>
+      <ClearButton />
+    </div>
   );
 }
-
-export default App;
