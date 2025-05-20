@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function AddItemForm() {
+export default function AddItemForm({ onAddItem }) {
   const [name, setName] = useState("");
 
   function handleFormSubmit(e) {
@@ -12,7 +12,7 @@ export default function AddItemForm() {
       completed: false,
     };
 
-    console.log(item.name);
+    onAddItem(item);
 
     setName("");
   }

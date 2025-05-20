@@ -6,6 +6,7 @@ import AddItemForm from "./components/AddItemFrom";
 import FilterButtons from "./components/FilterButtons";
 import ListItems from "./components/ListItems";
 import ClearButton from "./components/ClearButton";
+import { useState } from "react";
 
 const products = [
   { id: 1, name: "Egg", completed: true },
@@ -16,15 +17,21 @@ const products = [
 ];
 
 export default function App() {
+  const [items, setItems] = useState(products);
+
+  function handleAddItem(item) {
+    setItems((items) => [...items, item]);
+  }
+
   return (
     <div className="container">
       <Header />
 
-      <AddItemForm />
+      <AddItemForm onAddItem={handleAddItem} />
 
       <FilterButtons />
 
-      <ListItems products={products} />
+      <ListItems items={items} />
 
       <ClearButton />
     </div>
